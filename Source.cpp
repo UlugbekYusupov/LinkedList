@@ -85,10 +85,7 @@ void LINKED_LIST::printList()const {
 }
 void LINKED_LIST::deleteNode(int dataOut) {
 	bool flag = false;
-	if (emptyList()) {
-		cout << "empty list";
-	}
-	else {
+	if (!emptyList()) {
 		if (_deleteHead(dataOut) == false) {
 			_delete(dataOut);
 		}
@@ -107,13 +104,14 @@ bool LINKED_LIST::_deleteHead(int dataOut) {
 }
 bool LINKED_LIST::_delete(int dataOut) {
 	NODE* ptr = list->head,*temp;
-	while (ptr->data != dataOut) {
+	while (ptr->data != dataOut && ptr->link != nullptr) {
 		list->prev = ptr;
 		ptr = ptr->link;
 	}
-	temp = ptr;
-	list->prev->link = ptr->link;
-	delete(temp);
-
+	if(ptr == nullptr || ptr->data != dataOut){
+		temp = ptr;
+		list->prev->link = ptr->link;
+		delete(temp);
+	}
 	return true;
 }

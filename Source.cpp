@@ -103,12 +103,12 @@ bool LINKED_LIST::_deleteHead(int dataOut) {
 	return flag;
 }
 bool LINKED_LIST::_delete(int dataOut) {
-	NODE* ptr = list->head,*temp;
+	NODE* ptr = list->head, *temp;
 	while (ptr->data != dataOut && ptr->link != nullptr) {
 		list->prev = ptr;
 		ptr = ptr->link;
 	}
-	if(ptr == nullptr || ptr->data != dataOut){
+	if (ptr != nullptr && ptr->data == dataOut) {
 		temp = ptr;
 		list->prev->link = ptr->link;
 		delete(temp);
